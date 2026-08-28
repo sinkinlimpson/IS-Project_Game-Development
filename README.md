@@ -6,7 +6,7 @@ An arade-style roguelite twin-stick shooter developed as part of my Software Eng
 
 TBD
 
-## Technologie
+## Technologies
 
 - Godot
 - GDScript
