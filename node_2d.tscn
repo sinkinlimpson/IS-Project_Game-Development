@@ -1,6 +1,19 @@
 [gd_scene format=3 uid="uid://u4pcbk50goal"]
 
-[ext_resource type="Script" uid="uid://dpfa8je537urg" path="res://node_2d.gd" id="1_wtcfe"]
+[ext_resource type="Script" uid="uid://bjxbdouualesd" path="res://player.gd" id="1_0e48y"]
+[ext_resource type="Texture2D" uid="uid://b7ntv15js6ebj" path="res://icon.svg" id="1_wtcfe"]
 
-[node name="Node2D" type="Node2D" unique_id=902263998]
-script = ExtResource("1_wtcfe")
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ehluv"]
+radius = 18.0
+height = 40.0
+
+[node name="Player" type="CharacterBody2D" unique_id=1478800990]
+position = Vector2(343, 182)
+script = ExtResource("1_0e48y")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=473912999]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_wtcfe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=821943990]
+shape = SubResource("CapsuleShape2D_ehluv")
