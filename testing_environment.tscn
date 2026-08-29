@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://u4pcbk50goal" path="res://player.tscn" id="1_koh7o"]
 [ext_resource type="PackedScene" uid="uid://bum5l82p8f5b5" path="res://weapon.tscn" id="1_t5yg3"]
 [ext_resource type="PackedScene" uid="uid://5ccb4yah6npn" path="res://bullet.tscn" id="2_nd2q6"]
+[ext_resource type="PackedScene" uid="uid://c5phsoaq3oxtf" path="res://enemy.tscn" id="4_64df0"]
 
 [node name="Testing Environment" type="Node2D" unique_id=1154134679]
 
@@ -12,3 +13,6 @@ position = Vector2(486, 223)
 [node name="Weapon" parent="Player" unique_id=1801577537 instance=ExtResource("1_t5yg3")]
 position = Vector2(39, 4)
 bulletScene = ExtResource("2_nd2q6")
+
+[node name="Enemy" parent="." unique_id=300869881 instance=ExtResource("4_64df0")]
+position = Vector2(773, 179)
