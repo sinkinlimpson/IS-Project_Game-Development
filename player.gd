@@ -1,7 +1,9 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+const MAX_SPEED = 300.0
+const ACCELERATION = 1500.0
+const FRICTION = 1000.0
 
 func _physics_process(delta):
 
@@ -12,12 +14,9 @@ func _physics_process(delta):
 	# handle movement
 
 	if direction != Vector2.ZERO:
-		direction = direction.normalized()
-		velocity = direction * SPEED
+		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 	else:
-		velocity = Vector2.ZERO
-
-	print(velocity)
+		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 
 	move_and_slide()
 	
