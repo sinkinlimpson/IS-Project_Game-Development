@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://dklpj31jw6oj3" path="res://weapon.gd" id="1_o2wld"]
 [ext_resource type="Texture2D" uid="uid://waom7qpd25nh" path="res://weapon.png" id="1_swcir"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ehluv"]
+size = Vector2(8, 11)
+
 [node name="Weapon" type="Node2D" unique_id=1801577537]
 script = ExtResource("1_o2wld")
 
@@ -10,3 +13,9 @@ script = ExtResource("1_o2wld")
 texture_filter = 1
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_swcir")
+
+[node name="Muzzle" type="Area2D" parent="." unique_id=627461745]
+position = Vector2(22, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Muzzle" unique_id=1174558823]
+shape = SubResource("RectangleShape2D_ehluv")
