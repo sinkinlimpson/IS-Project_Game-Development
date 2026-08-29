@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bum5l82p8f5b5"]
+
+[ext_resource type="Script" uid="uid://dklpj31jw6oj3" path="res://weapon.gd" id="1_o2wld"]
+[ext_resource type="Texture2D" uid="uid://waom7qpd25nh" path="res://weapon.png" id="1_swcir"]
+
+[node name="Weapon" type="Node2D" unique_id=1801577537]
+script = ExtResource("1_o2wld")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=976238213]
+texture_filter = 1
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_swcir")
