@@ -1,7 +1,9 @@
 extends Node2D
 
 @export var bulletScene: PackedScene
-var cooldown = 0.2
+var cooldown = 0.15
+
+var flip = false
 
 func _process(delta):
 	look_at(get_global_mouse_position())
@@ -11,6 +13,21 @@ func _process(delta):
 			shoot()
 			cooldown = 0.2
 	cooldown -= delta
+
+	# handle flipping
+
+	flip = get_parent().flip
+
+	if flip:
+		scale.y = -1
+	else:
+		scale.y = 1
+
+	# stay in place
+	if flip:
+		position = get_parent().get_node("HandLeft").position
+	else:
+		position = get_parent().get_node("HandRight").position
 
 func shoot():
 	var bullet = bulletScene.instantiate()

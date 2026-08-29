@@ -5,6 +5,8 @@ const MAX_SPEED = 300.0
 const ACCELERATION = 1500.0
 const FRICTION = 1000.0
 
+var flip = false
+
 func _physics_process(delta):
 
 	#handle player input
@@ -19,4 +21,9 @@ func _physics_process(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 
 	move_and_slide()
+
+	# handle flipping
+	flip = get_global_mouse_position().x < global_position.x
+
+	$Sprite2D.flip_h = flip
 	

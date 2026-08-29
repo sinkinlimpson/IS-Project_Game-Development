@@ -10,5 +10,5 @@
 position = Vector2(486, 223)
 
 [node name="Weapon" parent="Player" unique_id=1801577537 instance=ExtResource("1_t5yg3")]
-position = Vector2(41, 2)
+position = Vector2(39, 4)
 bulletScene = ExtResource("2_nd2q6")

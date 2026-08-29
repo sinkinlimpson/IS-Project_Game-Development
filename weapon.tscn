@@ -11,11 +11,13 @@ script = ExtResource("1_o2wld")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=976238213]
 texture_filter = 1
+position = Vector2(1, 0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_swcir")
+offset = Vector2(28.5, -14)
 
 [node name="Muzzle" type="Area2D" parent="." unique_id=627461745]
-position = Vector2(22, -8)
+position = Vector2(37.25, -15)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Muzzle" unique_id=1174558823]
 shape = SubResource("RectangleShape2D_ehluv")
