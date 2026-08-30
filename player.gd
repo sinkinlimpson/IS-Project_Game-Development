@@ -5,6 +5,8 @@ const MAX_SPEED = 300.0
 const ACCELERATION = 1500.0
 const FRICTION = 1000.0
 
+@export var health = 5
+
 var flip = false
 
 func _physics_process(delta):

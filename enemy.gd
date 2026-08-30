@@ -7,6 +7,9 @@ func _process(delta):
 
 func takeDamage(amount):
 	health -= amount
+
+	print(str(amount) + " damage taken!")
+
 	if health <= 0:
 		die()
 
