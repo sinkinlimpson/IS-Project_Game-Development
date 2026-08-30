@@ -6,17 +6,17 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_ehluv"]
 radius = 7.071068
 
-[node name="Bullet" type="Node2D" unique_id=1441795833]
+[node name="Bullet" type="Area2D" unique_id=774669183]
 script = ExtResource("1_v8qja")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=432419406]
-
-[node name="Sprite2D" type="Sprite2D" parent="Area2D" unique_id=559522904]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1637027391]
 texture_filter = 1
 position = Vector2(0, -1)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_v7oki")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1377392727]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1310773649]
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_ehluv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
