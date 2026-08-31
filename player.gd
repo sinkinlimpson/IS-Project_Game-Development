@@ -28,4 +28,15 @@ func _physics_process(delta):
 	flip = get_global_mouse_position().x < global_position.x
 
 	$Sprite2D.flip_h = flip
+
+func takeDamage(amount):
+	health -= amount
+
+	print("damage taken")
+
+	if health <= 0:
+		die()
+
+func die():
+	queue_free()
 	
