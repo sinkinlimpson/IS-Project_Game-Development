@@ -3,21 +3,15 @@
 [ext_resource type="Script" uid="uid://dklpj31jw6oj3" path="res://weapon.gd" id="1_o2wld"]
 [ext_resource type="Texture2D" uid="uid://waom7qpd25nh" path="res://weapon.png" id="1_swcir"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ehluv"]
-size = Vector2(8, 11)
-
 [node name="Weapon" type="Node2D" unique_id=1801577537]
 script = ExtResource("1_o2wld")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=976238213]
 texture_filter = 1
 position = Vector2(1, 0)
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_swcir")
 offset = Vector2(28.5, -14)
 
-[node name="Muzzle" type="Area2D" parent="." unique_id=627461745]
-position = Vector2(37.25, -15)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Muzzle" unique_id=1174558823]
-shape = SubResource("RectangleShape2D_ehluv")
+[node name="Muzzle" type="Marker2D" parent="." unique_id=2140097981]
+position = Vector2(16, -6)

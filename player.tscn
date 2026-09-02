@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dlfvt1vga1djs" path="res://guy.png" id="2_onrkg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ehluv"]
-radius = 18.0
-height = 64.0
+radius = 8.0
+height = 32.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1478800990 groups=["player"]]
 script = ExtResource("1_onrkg")
@@ -13,14 +13,15 @@ script = ExtResource("1_onrkg")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=473912999]
 texture_filter = 1
 position = Vector2(-5.9999995, 0)
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_onrkg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=821943990]
+position = Vector2(-3, 0)
 shape = SubResource("CapsuleShape2D_ehluv")
 
 [node name="HandRight" type="Marker2D" parent="." unique_id=1997662508]
-position = Vector2(18, 3)
+position = Vector2(6, 3)
 
 [node name="HandLeft" type="Marker2D" parent="." unique_id=1550211305]
-position = Vector2(-30, 4)
+position = Vector2(-11, 3)
