@@ -24,4 +24,4 @@ shape = SubResource("CapsuleShape2D_ehluv")
 position = Vector2(6, 3)
 
 [node name="HandLeft" type="Marker2D" parent="." unique_id=1550211305]
-position = Vector2(-11, 3)
+position = Vector2(-15, 3)

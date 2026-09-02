@@ -10,4 +10,6 @@ func _on_body_entered(body: Node2D):
 	if body.is_in_group("player"):
 		body.takeDamage(1)
 		queue_free()
+	elif body.is_in_group("wall"):
+		queue_free()
 
