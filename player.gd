@@ -1,13 +1,11 @@
 extends CharacterBody2D
 
 
-const MAX_SPEED = 200.0
-const ACCELERATION = 1400.0
+const MAX_SPEED = 100.0
+const ACCELERATION = 1200.0
 const FRICTION = 900.0
 
 @export var health = 5
-
-var flip = false
 
 func _physics_process(delta):
 
@@ -23,11 +21,6 @@ func _physics_process(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 
 	move_and_slide()
-
-	# handle flipping
-	flip = get_global_mouse_position().x < global_position.x
-
-	$Sprite2D.flip_h = flip
 
 func takeDamage(amount):
 	health -= amount
