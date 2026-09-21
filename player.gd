@@ -10,6 +10,7 @@ enum States {IDLE, WALKING, ATTACKING, ROLLING, DEAD}
 
 var state: States = States.IDLE
 var lookDirection = "down"
+var invincible = false
 
 func _ready():
 	$AnimationPlayer.animation_finished.connect(_on_animation_finished)
@@ -98,9 +99,18 @@ func takeDamage(amount):
 		die() 
 
 func flicker(amt):
+	invincible = true
+
 	var tween = create_tween().set_loops(amt)
 	tween.tween_property($Sprite2D, "modulate:a", 0.2, 0.05)
 	tween.tween_property($Sprite2D, "modulate:a", 1.0, 0.05)
+
+	tween.connect("finished", Callable(self, "_on_flicker_finished"))
+
+func _on_flicker_finished():
+	invincible = false
+
+	print("flicker finished")
 
 func _on_animation_finished(anim_name: String):
 	if state == States.ATTACKING or state == States.ROLLING:
