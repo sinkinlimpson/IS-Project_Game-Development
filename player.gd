@@ -33,7 +33,7 @@ func _physics_process(delta):
 			if Input.is_action_just_pressed("attack"):
 				attack()
 			elif Input.is_action_just_pressed("dodgeRoll"):
-				dodgeRoll(lookDirection)
+				dodgeRoll(direction, lookDirection)
 
 		States.ROLLING:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * 0.5 * delta)
@@ -73,24 +73,34 @@ func handleAnim():
 func attack():
 	state = States.ATTACKING
 
-func dodgeRoll(lookDirection):
+func dodgeRoll(direction, lookDirection):
 	state = States.ROLLING
-
-	match lookDirection:
-		"up":
-			velocity = Vector2(0, -MAX_SPEED * 2.5)
-		"down":
-			velocity = Vector2(0, MAX_SPEED * 2.5)
-		"left":
-			velocity = Vector2(-MAX_SPEED * 2.5, 0)
-		"right":
-			velocity = Vector2(MAX_SPEED * 2.5, 0)
+	
+	if direction == Vector2.ZERO:
+		match lookDirection:
+			"up":
+				velocity = Vector2(0, -MAX_SPEED * 2.5)
+			"down":
+				velocity = Vector2(0, MAX_SPEED * 2.5)
+			"left":
+				velocity = Vector2(-MAX_SPEED * 2.5, 0)
+			"right":
+				velocity = Vector2(MAX_SPEED * 2.5, 0)
+	else:
+		velocity = direction.normalized() * MAX_SPEED * 2.5
+	flicker(4)
 
 func takeDamage(amount):
 	health -= amount
 	print("damage taken")
+	flicker(10)
 	if health <= 0:
-		die()
+		die() 
+
+func flicker(amt):
+	var tween = create_tween().set_loops(amt)
+	tween.tween_property($Sprite2D, "modulate:a", 0.2, 0.05)
+	tween.tween_property($Sprite2D, "modulate:a", 1.0, 0.05)
 
 func _on_animation_finished(anim_name: String):
 	if state == States.ATTACKING or state == States.ROLLING:
