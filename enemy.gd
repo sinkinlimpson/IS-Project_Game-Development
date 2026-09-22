@@ -7,18 +7,43 @@ extends CharacterBody2D
 
 var player: Node2D
 
+var invincible = false
+
+var knockbackStrength = 5.0
+var knockbackFriction = 500.0
+
 func _ready():
 	$ShootTimer.wait_time = shootCooldown
 	$ShootTimer.start()
 
 func _process(delta):
-	pass
+	if velocity != Vector2.ZERO:
+		velocity = velocity.move_toward(Vector2.ZERO, knockbackFriction * delta)
 
-func takeDamage(amount):
-	health -= amount
+	move_and_slide()
 
+func takeDamage(amount, fromDirection: Vector2):
+	if !invincible:
+		health -= amount
+		flicker(4)
+
+		if fromDirection != Vector2.ZERO:
+			var knockbackDirection = (global_position - fromDirection).normalized()
+			velocity = knockbackDirection * 200
 	if health <= 0:
 		die()
+
+func flicker(amt):
+	invincible = true
+
+	var tween = create_tween().set_loops(amt)
+	tween.tween_property($Sprite2D, "modulate:a", 0.2, 0.05)
+	tween.tween_property($Sprite2D, "modulate:a", 1.0, 0.05)
+
+	tween.connect("finished", Callable(self, "_on_flicker_finished"))
+
+func _on_flicker_finished():
+	invincible = false
 
 func die():
 	queue_free()

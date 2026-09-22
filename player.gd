@@ -10,7 +10,7 @@ enum States {IDLE, WALKING, ATTACKING, ROLLING, DEAD}
 
 var state: States = States.IDLE
 var lookDirection = "down"
-var invincible = false
+var invincible = true
 
 func _ready():
 	$AnimationPlayer.animation_finished.connect(_on_animation_finished)
@@ -80,15 +80,15 @@ func dodgeRoll(direction, lookDirection):
 	if direction == Vector2.ZERO:
 		match lookDirection:
 			"up":
-				velocity = Vector2(0, -MAX_SPEED * 2.5)
+				velocity = Vector2(0, -MAX_SPEED * 2.7)
 			"down":
-				velocity = Vector2(0, MAX_SPEED * 2.5)
+				velocity = Vector2(0, MAX_SPEED * 2.7)
 			"left":
-				velocity = Vector2(-MAX_SPEED * 2.5, 0)
+				velocity = Vector2(-MAX_SPEED * 2.7, 0)
 			"right":
-				velocity = Vector2(MAX_SPEED * 2.5, 0)
+				velocity = Vector2(MAX_SPEED * 2.7, 0)
 	else:
-		velocity = direction.normalized() * MAX_SPEED * 2.5
+		velocity = direction.normalized() * MAX_SPEED * 2.7
 	flicker(4)
 
 func takeDamage(amount):
@@ -110,11 +110,14 @@ func flicker(amt):
 func _on_flicker_finished():
 	invincible = false
 
-	print("flicker finished")
-
 func _on_animation_finished(anim_name: String):
 	if state == States.ATTACKING or state == States.ROLLING:
 		state = States.IDLE
 
 func die():
 	queue_free()
+
+
+func _on_hitbox_body_entered(body: Node2D):
+	if body.is_in_group("enemies"):
+		body.takeDamage(1, global_position)
