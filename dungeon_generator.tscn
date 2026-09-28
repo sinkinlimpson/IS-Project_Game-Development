@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://oqdhvy5j2cl"]
+
+[ext_resource type="Script" uid="uid://bh71jpvuovwhf" path="res://dungeon_generator.gd" id="1_667dc"]
+
+[node name="Dungeon Generator" type="Node2D" unique_id=366812947]
+script = ExtResource("1_667dc")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1168660755]
+offset = Vector2(2312, 2312)
