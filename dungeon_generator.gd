@@ -5,7 +5,15 @@ extends Node2D
 	preload("res://rooms/room_2.tscn"),
 	preload("res://rooms/room_3.tscn"),
 	preload("res://rooms/room_4.tscn"),
-	preload("res://rooms/room_5.tscn")
+	preload("res://rooms/room_5.tscn"),
+	preload("res://rooms/room_6.tscn"),
+	preload("res://rooms/room_7.tscn"),
+	preload("res://rooms/room_8.tscn"),
+	preload("res://rooms/room_9.tscn"),
+	preload("res://rooms/room_10.tscn"),
+	preload("res://rooms/room_11.tscn"),
+	preload("res://rooms/room_12.tscn"),
+	preload("res://rooms/room_13.tscn")
 ]
 
 @export var gridWidth: int = 17
