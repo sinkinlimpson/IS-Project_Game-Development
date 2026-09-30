@@ -5,7 +5,7 @@
 
 [node name="room_5" type="Node2D" unique_id=686691244]
 script = ExtResource("1_akbkh")
-hasSouth = true
+hasNorth = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1310045984]
 texture_filter = 1

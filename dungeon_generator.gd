@@ -13,7 +13,9 @@ extends Node2D
 	preload("res://rooms/room_10.tscn"),
 	preload("res://rooms/room_11.tscn"),
 	preload("res://rooms/room_12.tscn"),
-	preload("res://rooms/room_13.tscn")
+	preload("res://rooms/room_13.tscn"),
+	preload("res://rooms/room_14.tscn"),
+	preload("res://rooms/room_15.tscn")
 ]
 
 @export var gridWidth: int = 17
@@ -53,7 +55,7 @@ func spawnDungeonRooms():
 		var requiresW = dungeonGrid.has(pos + Vector2i.LEFT)
 		var requiresE = dungeonGrid.has(pos + Vector2i.RIGHT)
 
-		var validRoomScene = findValidRoom(requiresN, requiresS, requiresW, requiresE)
+		var validRoomScene = findValidRoom(requiresN, requiresS, requiresE, requiresW)
 		
 		if validRoomScene:
 			var roomInstance = validRoomScene.instantiate()
@@ -77,13 +79,7 @@ func findValidRoom(n: bool, s: bool, e: bool, w: bool):
 
 		tempRoom.queue_free()
 
-		var matches = true
-		if n and not rNorth: matches = false
-		if s and not rSouth: matches = false
-		if e and not rEast: matches = false
-		if w and not rWest: matches = false
-
-		if matches:
+		if rNorth == n and rSouth == s and rEast == e and rWest == w:
 			return prefab
 
 	return rooms[0]
