@@ -4,7 +4,4 @@
 
 [node name="Dungeon Generator" type="Node2D" unique_id=366812947]
 script = ExtResource("1_667dc")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1168660755]
-offset = Vector2(2312, 2312)
-zoom = Vector2(0.5, 0.5)
+maxRooms = 20

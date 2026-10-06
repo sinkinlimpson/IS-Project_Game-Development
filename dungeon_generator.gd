@@ -1,22 +1,9 @@
 extends Node2D
 
-@export var rooms: Array[PackedScene] = [
-	preload("res://rooms/room_1.tscn"),
-	preload("res://rooms/room_2.tscn"),
-	preload("res://rooms/room_3.tscn"),
-	preload("res://rooms/room_4.tscn"),
-	preload("res://rooms/room_5.tscn"),
-	preload("res://rooms/room_6.tscn"),
-	preload("res://rooms/room_7.tscn"),
-	preload("res://rooms/room_8.tscn"),
-	preload("res://rooms/room_9.tscn"),
-	preload("res://rooms/room_10.tscn"),
-	preload("res://rooms/room_11.tscn"),
-	preload("res://rooms/room_12.tscn"),
-	preload("res://rooms/room_13.tscn"),
-	preload("res://rooms/room_14.tscn"),
-	preload("res://rooms/room_15.tscn")
-]
+@export var rooms: Array[PackedScene] = []
+
+@export var camera: Camera2D
+@export var player: Node2D
 
 @export var gridWidth: int = 17
 @export var gridHeight: int = 17
@@ -26,11 +13,37 @@ extends Node2D
 var dungeonGrid = {}
 var roomInstances = {}
 
-func _ready():
+var bossRoomPosition: Vector2i = Vector2i(-1, -1)
+
+func _process(delta):
+	if Input.is_action_just_pressed("ui_accept"):
+		generate()
+
+func generate():
+	dungeonGrid.clear()
+
+	for room in roomInstances.values():
+		room.queue_free()
+
+	roomInstances.clear()
 	randomize()
 	generateDungeonLayout()
+	ensureStraggler()
+	selectBossRoom()
 	spawnDungeonRooms()
-	printDungeonLayout() # Print ASCII map to output console
+
+	if is_instance_valid(camera) and camera.has_method("snapToPlayer"):
+		camera.snapToPlayer()
+
+	printDungeonLayout()
+
+func _ready():
+	for x in range(1, 16):
+		rooms.append(load("res://rooms/room_" + str(x) + ".tscn"))
+	for x in range(1, 5):
+		rooms.append(load("res://rooms/boss_" + str(x) + ".tscn"))
+	
+	generate()
 
 func generateDungeonLayout():
 	var currentPos = Vector2i(gridWidth / 2, gridHeight / 2)
@@ -48,6 +61,60 @@ func generateDungeonLayout():
 		if nextPos.x >= 0 and nextPos.x < gridWidth and nextPos.y >= 0 and nextPos.y < gridHeight and not dungeonGrid.has(nextPos):
 			dungeonGrid[nextPos] = true
 
+func getDeadEndPositions():
+	var startPos = Vector2i(gridWidth / 2, gridHeight / 2)
+	var deadEnds = []
+
+	for pos in dungeonGrid.keys():
+		if pos != startPos and countNeighors(pos) == 1:
+			deadEnds.append(pos)
+	
+	return deadEnds
+
+func countNeighors(pos: Vector2i) -> int:
+	var count = 0
+	var directions = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
+
+	for dir in directions:
+		if dungeonGrid.has(pos + dir):
+			count += 1
+	
+	return count
+
+func ensureStraggler():
+	var deadEnds = getDeadEndPositions()
+
+	if deadEnds.is_empty():
+		var directions = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
+		var keys = dungeonGrid.keys()
+		keys.shuffle()
+
+		for pos in keys:
+			for dir in directions:
+				var nextPos = pos + dir
+				if nextPos.x >= 0 and nextPos.x < gridWidth and nextPos.y >= 0 and nextPos.y < gridHeight and not dungeonGrid.has(nextPos):
+					if not dungeonGrid.has(nextPos) and countNeighors(nextPos) == 1:
+						dungeonGrid[nextPos] = true
+						return
+
+func selectBossRoom():
+	var startPos = Vector2i(gridWidth / 2, gridHeight / 2)
+	var deadEnds = getDeadEndPositions()
+
+	if deadEnds.is_empty():
+		return
+	
+	var furthestPos = deadEnds[0]
+	var maxDistance = startPos.distance_squared_to(furthestPos)
+
+	for pos in deadEnds:
+		var distance = startPos.distance_squared_to(pos)
+		if distance > maxDistance:
+			maxDistance = distance
+			furthestPos = pos
+	
+	bossRoomPosition = furthestPos
+
 func spawnDungeonRooms():
 	for pos in dungeonGrid.keys():
 		var requiresN = dungeonGrid.has(pos + Vector2i.UP)
@@ -55,7 +122,8 @@ func spawnDungeonRooms():
 		var requiresW = dungeonGrid.has(pos + Vector2i.LEFT)
 		var requiresE = dungeonGrid.has(pos + Vector2i.RIGHT)
 
-		var validRoomScene = findValidRoom(requiresN, requiresS, requiresE, requiresW)
+		var isBossLocation = pos == bossRoomPosition
+		var validRoomScene = findValidRoom(requiresN, requiresS, requiresE, requiresW, isBossLocation)
 		
 		if validRoomScene:
 			var roomInstance = validRoomScene.instantiate()
@@ -63,13 +131,18 @@ func spawnDungeonRooms():
 			add_child(roomInstance)
 			roomInstances[pos] = roomInstance
 
-func findValidRoom(n: bool, s: bool, e: bool, w: bool):
+func findValidRoom(n: bool, s: bool, e: bool, w: bool, isBossLocation: bool = false) -> PackedScene:
 	var matchingRooms: Array[PackedScene] = []
 
 	var shuffled = rooms.duplicate()
 	shuffled.shuffle()
 
 	for prefab in shuffled:
+		var isBossRoom = prefab.resource_path.begins_with("res://rooms/boss_")
+
+		if isBossLocation != isBossRoom:
+			continue
+
 		var tempRoom = prefab.instantiate()
 
 		var rNorth = tempRoom.get("hasNorth") if "hasNorth" in tempRoom else false
@@ -101,6 +174,3 @@ func printDungeonLayout():
 		print(rowStr)
 	print("Total Rooms Generated: ", dungeonGrid.size())
 	print("---------------------\n")
-
-func _process(delta):
-	pass

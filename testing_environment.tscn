@@ -1,16 +1,19 @@
 [gd_scene format=3 uid="uid://0vitdr60kvl7"]
 
-[ext_resource type="PackedScene" uid="uid://b0a7j60aruor0" path="res://rooms/room_1.tscn" id="1_77jpo"]
 [ext_resource type="PackedScene" uid="uid://u4pcbk50goal" path="res://player.tscn" id="1_koh7o"]
-[ext_resource type="PackedScene" uid="uid://cq5k6bhi05k0f" path="res://ui_camera.tscn" id="4_tl4bv"]
+[ext_resource type="PackedScene" uid="uid://oqdhvy5j2cl" path="res://dungeon_generator.tscn" id="2_nd2q6"]
+[ext_resource type="PackedScene" uid="uid://c0c5j05l7gncu" path="res://room_camera.tscn" id="3_koh7o"]
 
 [node name="Testing Environment" type="Node2D" unique_id=1154134679]
 
-[node name="room_1" parent="." unique_id=161257606 instance=ExtResource("1_77jpo")]
-position = Vector2(682, 222)
-
 [node name="Player" parent="." unique_id=1478800990 instance=ExtResource("1_koh7o")]
-position = Vector2(598, 248)
+z_index = 1
+position = Vector2(2176, 2176)
 
-[node name="ui_camera" parent="Player" unique_id=1393969301 instance=ExtResource("4_tl4bv")]
-position = Vector2(-567, -326)
+[node name="Dungeon Generator" parent="." unique_id=366812947 node_paths=PackedStringArray("camera", "player") instance=ExtResource("2_nd2q6")]
+camera = NodePath("../Room Camera")
+player = NodePath("../Player")
+
+[node name="Room Camera" parent="." unique_id=2095972043 node_paths=PackedStringArray("player") instance=ExtResource("3_koh7o")]
+zoom = Vector2(2.3, 2.3)
+player = NodePath("../Player")
