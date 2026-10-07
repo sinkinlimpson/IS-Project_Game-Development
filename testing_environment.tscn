@@ -1,19 +1,28 @@
 [gd_scene format=3 uid="uid://0vitdr60kvl7"]
 
+[ext_resource type="Script" uid="uid://ckko4pruycyk1" path="res://debug.gd" id="1_64df0"]
 [ext_resource type="PackedScene" uid="uid://u4pcbk50goal" path="res://player.tscn" id="1_koh7o"]
 [ext_resource type="PackedScene" uid="uid://oqdhvy5j2cl" path="res://dungeon_generator.tscn" id="2_nd2q6"]
 [ext_resource type="PackedScene" uid="uid://c0c5j05l7gncu" path="res://room_camera.tscn" id="3_koh7o"]
 
 [node name="Testing Environment" type="Node2D" unique_id=1154134679]
+script = ExtResource("1_64df0")
 
 [node name="Player" parent="." unique_id=1478800990 instance=ExtResource("1_koh7o")]
 z_index = 1
 position = Vector2(2176, 2176)
 
 [node name="Dungeon Generator" parent="." unique_id=366812947 node_paths=PackedStringArray("camera", "player") instance=ExtResource("2_nd2q6")]
-camera = NodePath("../Room Camera")
+camera = NodePath("../RoomCamera")
 player = NodePath("../Player")
 
-[node name="Room Camera" parent="." unique_id=2095972043 node_paths=PackedStringArray("player") instance=ExtResource("3_koh7o")]
-zoom = Vector2(2.3, 2.3)
+[node name="RoomCamera" parent="." unique_id=2095972043 node_paths=PackedStringArray("player") instance=ExtResource("3_koh7o")]
+position = Vector2(2176, 2176)
+zoom = Vector2(3, 3)
 player = NodePath("../Player")
+transitionDuration = 0.35
+
+[node name="DebugCamera" type="Camera2D" parent="." unique_id=1659221744]
+position = Vector2(2176, 2176)
+enabled = false
+zoom = Vector2(0.3, 0.3)
