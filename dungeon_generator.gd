@@ -35,8 +35,6 @@ func generate():
 	if is_instance_valid(camera) and camera.has_method("snapToPlayer"):
 		camera.snapToPlayer()
 
-	printDungeonLayout()
-
 func _ready():
 	for x in range(1, 16):
 		rooms.append(load("res://rooms/room_" + str(x) + ".tscn"))
