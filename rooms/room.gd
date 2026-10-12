@@ -1,4 +1,5 @@
 extends Node2D
+class_name Room
 
 @export var hasNorth: bool = false
 @export var hasSouth: bool = false
@@ -11,6 +12,8 @@ extends Node2D
 @export var hasEnemies: bool = false
 @export var enemyCount: int = 0
 
+@export var beenEntered: bool = false
+var alreadyEntered: bool = false
 
 var doorCoordinates = {
 	"north": Vector2(8, -120),
@@ -40,8 +43,6 @@ func _ready():
 		spawnDoor("east", doorCoordinates["east"], PI/2)
 	if hasWest:
 		spawnDoor("west", doorCoordinates["west"], -PI/2)
-	
-	spawnEnemies()
 
 func spawnEnemies():
 	if hasEnemies:
@@ -66,3 +67,22 @@ func create_debug_marker(pos: Vector2):
 	marker.color = Color.RED
 	marker.size = Vector2(8, 8)
 	marker.position = pos - Vector2(4, 4)
+
+func dealWithEnter():
+	if not alreadyEntered:
+		if hasEnemies:
+			alreadyEntered = true
+			spawnEnemies()
+
+			for child in get_children():
+				if child.scene_file_path == "res://door.tscn":
+					child.collision.disabled = false
+
+func _process(delta):
+	if beenEntered:
+		dealWithEnter()
+	
+	if enemyCount == 0:
+		for child in get_children():
+			if child.scene_file_path == "res://door.tscn":
+				child.collision.disabled = true

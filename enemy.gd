@@ -46,6 +46,9 @@ func _on_flicker_finished():
 	invincible = false
 
 func die():
+	if get_parent() is Room:
+		get_parent().enemyCount -= 1
+
 	queue_free()
 
 func _on_shoot_timer_timeout():
