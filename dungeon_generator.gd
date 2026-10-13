@@ -36,12 +36,30 @@ func generate():
 		camera.snapToPlayer()
 
 func _ready():
-	for x in range(1, 16):
-		rooms.append(load("res://rooms/room_" + str(x) + ".tscn"))
-	for x in range(1, 5):
-		rooms.append(load("res://rooms/boss_" + str(x) + ".tscn"))
-	
+	loadRooms("res://rooms/")
+
 	generate()
+
+func loadRooms(path: String):
+	var dir = DirAccess.open(path)
+
+	if not dir:
+		return
+	
+	var subfolders = DirAccess.get_directories_at(path)
+
+	for folderName in subfolders:
+		var subfolderPath = path.path_join(folderName)
+		loadRooms(subfolderPath)
+	
+	var files = DirAccess.get_files_at(path)
+
+	for fileName in files:
+		if fileName.ends_with(".tscn"):
+			var scenePath = path.path_join(fileName)
+			var scene = load(scenePath)
+			if scene is PackedScene:
+				rooms.append(scene)
 
 func generateDungeonLayout():
 	var currentPos = Vector2i(gridWidth / 2, gridHeight / 2)
@@ -136,7 +154,7 @@ func findValidRoom(n: bool, s: bool, e: bool, w: bool, isBossLocation: bool = fa
 	shuffled.shuffle()
 
 	for prefab in shuffled:
-		var isBossRoom = prefab.resource_path.begins_with("res://rooms/boss_")
+		var isBossRoom = prefab.resource_path.contains("bossRooms") or prefab.resource_path.contains("boss_")
 
 		if isBossLocation != isBossRoom:
 			continue
