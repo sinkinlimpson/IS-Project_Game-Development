@@ -13,6 +13,9 @@ extends Node2D
 var dungeonGrid = {}
 var roomInstances = {}
 
+var startRoom: PackedScene
+var startPos: Vector2i = Vector2i(gridWidth / 2, gridHeight / 2)
+
 var bossRoomPosition: Vector2i = Vector2i(-1, -1)
 
 func _process(delta):
@@ -32,10 +35,14 @@ func generate():
 	selectBossRoom()
 	spawnDungeonRooms()
 
+	printDungeonLayout()
+
 	if is_instance_valid(camera) and camera.has_method("snapToPlayer"):
 		camera.snapToPlayer()
 
 func _ready():
+	startRoom = load("res://rooms/room_start.tscn")
+
 	loadRooms("res://rooms/")
 
 	generate()
@@ -55,15 +62,20 @@ func loadRooms(path: String):
 	var files = DirAccess.get_files_at(path)
 
 	for fileName in files:
-		if fileName.ends_with(".tscn"):
+		if fileName.ends_with(".tscn") and fileName != "room_start.tscn":
 			var scenePath = path.path_join(fileName)
 			var scene = load(scenePath)
 			if scene is PackedScene:
 				rooms.append(scene)
 
+func isBlocked(pos: Vector2i) -> bool:
+	return pos == startPos + Vector2i.UP or pos == startPos + Vector2i.DOWN
+
 func generateDungeonLayout():
-	var currentPos = Vector2i(gridWidth / 2, gridHeight / 2)
-	dungeonGrid[currentPos] = true
+	startPos = Vector2i(gridWidth / 2, gridHeight / 2)
+	dungeonGrid[startPos] = true
+	dungeonGrid[startPos + Vector2i.LEFT] = true
+	dungeonGrid[startPos + Vector2i.RIGHT] = true
 
 	var directions = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
 
@@ -71,8 +83,10 @@ func generateDungeonLayout():
 		var branchPoints = dungeonGrid.keys()
 		var randomBranch = branchPoints[randi() % branchPoints.size()]
 		var randomDirection = directions[randi() % directions.size()]
-
 		var nextPos = randomBranch + randomDirection
+
+		if isBlocked(nextPos):
+			continue
 
 		if nextPos.x >= 0 and nextPos.x < gridWidth and nextPos.y >= 0 and nextPos.y < gridHeight and not dungeonGrid.has(nextPos):
 			dungeonGrid[nextPos] = true
@@ -108,7 +122,7 @@ func ensureStraggler():
 		for pos in keys:
 			for dir in directions:
 				var nextPos = pos + dir
-				if nextPos.x >= 0 and nextPos.x < gridWidth and nextPos.y >= 0 and nextPos.y < gridHeight and not dungeonGrid.has(nextPos):
+				if nextPos.x >= 0 and nextPos.x < gridWidth and nextPos.y >= 0 and nextPos.y < gridHeight and not dungeonGrid.has(nextPos) and not isBlocked(nextPos):
 					if not dungeonGrid.has(nextPos) and countNeighors(nextPos) == 1:
 						dungeonGrid[nextPos] = true
 						return
@@ -139,7 +153,12 @@ func spawnDungeonRooms():
 		var requiresE = dungeonGrid.has(pos + Vector2i.RIGHT)
 
 		var isBossLocation = pos == bossRoomPosition
-		var validRoomScene = findValidRoom(requiresN, requiresS, requiresE, requiresW, isBossLocation)
+		var validRoomScene: PackedScene
+
+		if pos == startPos:
+			validRoomScene = startRoom
+		else:
+			validRoomScene = findValidRoom(requiresN, requiresS, requiresE, requiresW, isBossLocation)
 		
 		if validRoomScene:
 			var roomInstance = validRoomScene.instantiate()
