@@ -360,7 +360,7 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id="Animation_b26j0"]
 resource_name = "attack_up"
-length = 0.2
+length = 0.19999999999999998
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -720,6 +720,7 @@ _data = {
 size = Vector2(9, 7)
 
 [node name="Player" type="CharacterBody2D" unique_id=1478800990 groups=["player"]]
+motion_mode = 1
 script = ExtResource("1_onrkg")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=473912999]

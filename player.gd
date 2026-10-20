@@ -8,12 +8,27 @@ const FRICTION = 900.0
 
 enum States {IDLE, WALKING, ATTACKING, ROLLING, DEAD}
 
+const FACING = {
+	"up" = Vector2.UP,
+	"down" = Vector2.DOWN,
+	"left" = Vector2.LEFT,
+	"right" = Vector2.RIGHT
+}
+
+const LUNGE_DISTANCE = 15.0
+const LUNGE_TIME = 0.18
+const LUNGE_PEAK_SPEED = 2.0 * LUNGE_DISTANCE / LUNGE_TIME
+
+var attackTime = 0.0
+
 var state: States = States.IDLE
 var lookDirection = "down"
 var invincible = true
 
 func _ready():
 	$AnimationPlayer.animation_finished.connect(_on_animation_finished)
+
+	$Hitbox/CollisionShape2D.disabled = true
 
 func _physics_process(delta):
 	# get input
@@ -41,6 +56,10 @@ func _physics_process(delta):
 
 		States.ATTACKING:
 			velocity = Vector2.ZERO
+			
+			attackTime += delta
+			var t = clampf(attackTime / LUNGE_TIME, 0.0, 1.0)
+			velocity = FACING[lookDirection] * LUNGE_PEAK_SPEED * (1.0 - t)
 
 	move_and_slide()
 	handleAnim()
@@ -73,6 +92,7 @@ func handleAnim():
 
 func attack():
 	state = States.ATTACKING
+	attackTime = 0.0
 
 func dodgeRoll(direction, lookDirection):
 	state = States.ROLLING
