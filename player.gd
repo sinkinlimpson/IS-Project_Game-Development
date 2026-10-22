@@ -55,8 +55,6 @@ func _physics_process(delta):
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * 0.5 * delta)
 
 		States.ATTACKING:
-			velocity = Vector2.ZERO
-			
 			attackTime += delta
 			var t = clampf(attackTime / LUNGE_TIME, 0.0, 1.0)
 			velocity = FACING[lookDirection] * LUNGE_PEAK_SPEED * (1.0 - t)

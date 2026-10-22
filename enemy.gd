@@ -55,7 +55,7 @@ var contactTimer = 0.0
 
 var invincible = false
 
-var knockbackStrength = 5.0
+var knockbackStrength = 200.0
 var knockbackFriction = 500.0
 var knockbackVelocity = Vector2.ZERO
 
@@ -67,7 +67,7 @@ func _ready():
 	if meleeEnemy:
 		pickWanderDirection()
 
-func _process(delta):
+func _physics_process(delta):
 	updatePlayer()
 
 	var desiredVelocity = Vector2.ZERO
@@ -92,7 +92,7 @@ func meleeLogic(delta):
 				if state != States.MOVE:
 					return Vector2.ZERO
 				
-				return moveVelocity(get_position_delta())
+			return moveVelocity(delta)
 		States.CHARGE_WINDUP:
 			stateTimer -= delta
 			if stateTimer <= 0.0:
@@ -137,7 +137,7 @@ func pickWanderDirection():
 	if roll < idleChance:
 		moveDir = Vector2.ZERO
 	elif player!= null and roll < idleChance + chaseChance and distanceToPlayer() <= detectionRange:
-		moveDir = _snap((player.glocal_position - global_position).normalized())
+		moveDir = _snap((player.global_position - global_position).normalized())
 	elif fourDirection:
 		moveDir = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT].pick_random()
 	else:
@@ -198,7 +198,7 @@ func takeDamage(amount, fromDirection: Vector2):
 
 		if fromDirection != Vector2.ZERO:
 			var knockbackDirection = (global_position - fromDirection).normalized()
-			velocity = knockbackDirection * 200
+			knockbackVelocity = knockbackDirection * knockbackStrength
 	if health <= 0:
 		die()
 

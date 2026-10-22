@@ -4,15 +4,25 @@
 [ext_resource type="Texture2D" uid="uid://cpercofebylmj" path="res://enemy.png" id="1_7k104"]
 [ext_resource type="PackedScene" uid="uid://bqfyg1p2ji13i" path="res://enemy_bullet.tscn" id="2_qi2p4"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ehluv"]
+size = Vector2(21, 33)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ehluv"]
-radius = 9.0
-height = 34.0
+radius = 8.0
+height = 32.0
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1274796762 groups=["enemies"]]
 motion_mode = 1
 script = ExtResource("1_4gyqm")
 health = 3
 bulletScene = ExtResource("2_qi2p4")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=367308213]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=316099013]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_ehluv")
+debug_color = Color(0.541767, 0.56726605, 0, 0.41960785)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1121289006]
 texture_filter = 1
@@ -27,10 +37,5 @@ position = Vector2(0, -4)
 
 [node name="ShootTimer" type="Timer" parent="." unique_id=1115666038]
 wait_time = 2.0
-
-[node name="Hitbox" type="Area2D" parent="." unique_id=367308213]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=820735231]
-shape = SubResource("CapsuleShape2D_ehluv")
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
