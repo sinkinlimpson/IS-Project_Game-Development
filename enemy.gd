@@ -186,9 +186,10 @@ func checkContactDamage(delta):
 	
 	for body in hitbox.get_overlapping_bodies():
 		if body.is_in_group("player"):
-			body.takeDamage(contactDamage, global_position)
-			contactTimer = contactCooldown
-			break
+			if body.state != body.States.ATTACKING:
+				body.takeDamage(contactDamage, global_position)
+				contactTimer = contactCooldown
+				break
 				
 
 func takeDamage(amount, fromDirection: Vector2):

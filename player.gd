@@ -110,6 +110,9 @@ func dodgeRoll(direction, lookDirection):
 	flicker(4)
 
 func takeDamage(amount, fromDirection: Vector2):
+	if invincible:
+		return
+
 	health -= amount
 	print("damage taken")
 	flicker(10)
