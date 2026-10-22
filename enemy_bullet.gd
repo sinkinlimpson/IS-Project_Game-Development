@@ -9,7 +9,7 @@ func _process(delta):
 func _on_body_entered(body: Node2D):
 	if body.is_in_group("player"):
 		if !body.invincible == true:
-			body.takeDamage(1)
+			body.takeDamage(1, global_position)
 			queue_free()
 	elif body.is_in_group("wall"):
 		queue_free()

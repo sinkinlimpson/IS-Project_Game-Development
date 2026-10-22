@@ -23,7 +23,7 @@ var attackTime = 0.0
 
 var state: States = States.IDLE
 var lookDirection = "down"
-var invincible = true
+var invincible = false
 
 func _ready():
 	$AnimationPlayer.animation_finished.connect(_on_animation_finished)
@@ -111,10 +111,15 @@ func dodgeRoll(direction, lookDirection):
 		velocity = direction.normalized() * MAX_SPEED * 2.7
 	flicker(4)
 
-func takeDamage(amount):
+func takeDamage(amount, fromDirection: Vector2):
 	health -= amount
 	print("damage taken")
 	flicker(10)
+
+	if fromDirection != Vector2.ZERO:
+			var knockbackDirection = (global_position - fromDirection).normalized()
+			velocity = knockbackDirection * 200
+
 	if health <= 0:
 		die() 
 
@@ -137,7 +142,7 @@ func _on_animation_finished(anim_name: String):
 func die():
 	queue_free()
 
-
+# sword dealing damage to enemy
 func _on_hitbox_body_entered(body: Node2D):
 	if body.is_in_group("enemies"):
 		body.takeDamage(1, global_position)

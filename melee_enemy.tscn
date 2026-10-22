@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dnw4sxb7n4nq5"]
+
+[ext_resource type="PackedScene" uid="uid://c5phsoaq3oxtf" path="res://enemy.tscn" id="1_otv3p"]
+
+[node name="Enemy" unique_id=1274796762 instance=ExtResource("1_otv3p")]
+meleeEnemy = true
+fourDirection = true
+
+[node name="Sprite2D" parent="." index="0" unique_id=1121289006]
+self_modulate = Color(0, 1, 0.3703063, 1)

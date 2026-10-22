@@ -28,4 +28,9 @@ position = Vector2(0, -4)
 [node name="ShootTimer" type="Timer" parent="." unique_id=1115666038]
 wait_time = 2.0
 
+[node name="Hitbox" type="Area2D" parent="." unique_id=367308213]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=820735231]
+shape = SubResource("CapsuleShape2D_ehluv")
+
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
