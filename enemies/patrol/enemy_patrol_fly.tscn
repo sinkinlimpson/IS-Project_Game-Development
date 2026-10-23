@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://qkqfmtrv7n6n"]
+
+[ext_resource type="PackedScene" uid="uid://c5phsoaq3oxtf" path="res://enemy.tscn" id="1_ub72g"]
+[ext_resource type="Texture2D" uid="uid://mxqj2kwdl41o" path="res://bat.png" id="2_ub72g"]
+
+[node name="Enemy" unique_id=1274796762 instance=ExtResource("1_ub72g")]
+health = 2
+meleeEnemy = true
+moveSpeed = 90.0
+wanderTimeMin = 0.3
+wanderTimeMax = 0.7
+chaseChance = 0.3
+idleChance = 0.4
+
+[node name="CollisionShape2D" parent="Hitbox" parent_id_path=PackedInt32Array(367308213) index="0" unique_id=316099013]
+scale = Vector2(1, 0.39999986)
+
+[node name="Sprite2D" parent="." index="1" unique_id=1121289006]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_ub72g")
+
+[node name="CollisionShape2D" parent="." index="2" unique_id=1126840137]
+scale = Vector2(1.1600001, 0.3600006)
