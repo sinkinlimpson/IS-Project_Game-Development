@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://be5nmyyjsvqjn"]
+
+[ext_resource type="Script" uid="uid://cvaw2gbs8c705" path="res://enemies/boss.gd" id="1_a60ye"]
+[ext_resource type="PackedScene" uid="uid://bqfyg1p2ji13i" path="res://enemy_bullet.tscn" id="2_lnbgr"]
+[ext_resource type="Texture2D" uid="uid://bit71yc4ek4jr" path="res://max.JPG" id="2_n18d2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ehluv"]
+size = Vector2(54, 54)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbsx1"]
+size = Vector2(51, 50)
+
+[node name="Boss" type="CharacterBody2D" unique_id=1274796762 groups=["enemies"]]
+motion_mode = 1
+script = ExtResource("1_a60ye")
+health = 12
+bulletScene = ExtResource("2_lnbgr")
+shootEnemy = true
+meleeEnemy = true
+knockbackStrength = 220.0
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=367308213]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=316099013]
+shape = SubResource("RectangleShape2D_ehluv")
+debug_color = Color(0.541767, 0.56726605, 0, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1121289006]
+texture_filter = 1
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("2_n18d2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1126840137]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_nbsx1")
+
+[node name="Muzzle" type="Marker2D" parent="." unique_id=1178013927]
+position = Vector2(1, 14)
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=1115666038]
+wait_time = 2.0
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

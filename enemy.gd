@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Enemy
+
 @export var health = 5
 @export var bulletScene: PackedScene
 
@@ -55,7 +57,9 @@ var contactTimer = 0.0
 
 var invincible = false
 
-var knockbackStrength = 200.0
+@export_group("hi")
+
+@export var knockbackStrength = 200.0
 var knockbackFriction = 500.0
 var knockbackVelocity = Vector2.ZERO
 
