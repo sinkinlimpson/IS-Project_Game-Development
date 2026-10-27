@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cc7e7ydetwqlo"]
 
 [ext_resource type="Script" uid="uid://bifhtnhvxsqx1" path="res://enemy_spawner.gd" id="1_00s5r"]
-[ext_resource type="PackedScene" uid="uid://qkqfmtrv7n6n" path="res://enemies/patrol/enemy_patrol_fly.tscn" id="2_00s5r"]
+[ext_resource type="PackedScene" uid="uid://bjgy38bvydwvo" path="res://enemies/chase/chase_enemy_fat.tscn" id="2_00s5r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ehluv"]
 

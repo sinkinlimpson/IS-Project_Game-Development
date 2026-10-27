@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bjgy38bvydwvo"]
+
+[ext_resource type="PackedScene" uid="uid://dnw4sxb7n4nq5" path="res://melee_enemy.tscn" id="1_57psw"]
+[ext_resource type="Texture2D" uid="uid://cuum521ia17bi" path="res://turtle.png" id="2_57psw"]
+
+[node name="Enemy" unique_id=1274796762 instance=ExtResource("1_57psw")]
+health = 4
+behavior = 1
+moveSpeed = 30.0
+detectionRange = 1000.0
+
+[node name="CollisionShape2D" parent="Hitbox" parent_id_path=PackedInt32Array(367308213) index="0" unique_id=316099013]
+position = Vector2(-5.9604645e-08, 0)
+scale = Vector2(0.920002, 0.31999984)
+
+[node name="Sprite2D" parent="." index="1" unique_id=1121289006]
+self_modulate = Color(1, 1, 1, 1)
+scale = Vector2(0.17, 0.17)
+texture = ExtResource("2_57psw")
+
+[node name="CollisionShape2D" parent="." index="2" unique_id=1126840137]
+position = Vector2(-1.1920929e-07, 0)
+scale = Vector2(1.1407756, 0.2799998)
