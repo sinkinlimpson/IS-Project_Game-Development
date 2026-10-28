@@ -15,8 +15,7 @@ motion_mode = 1
 script = ExtResource("1_a60ye")
 health = 12
 bulletScene = ExtResource("2_lnbgr")
-shootEnemy = true
-meleeEnemy = true
+moveSpeed = 100.0
 knockbackStrength = 220.0
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=367308213]
