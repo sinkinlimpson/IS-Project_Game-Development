@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://be5nmyyjsvqjn"]
 
 [ext_resource type="Script" uid="uid://cvaw2gbs8c705" path="res://enemies/boss.gd" id="1_a60ye"]
-[ext_resource type="PackedScene" uid="uid://bqfyg1p2ji13i" path="res://enemy_bullet.tscn" id="2_lnbgr"]
 [ext_resource type="Texture2D" uid="uid://bit71yc4ek4jr" path="res://max.JPG" id="2_n18d2"]
+[ext_resource type="PackedScene" uid="uid://xco4f5d02pk4" path="res://boss_bullet.tscn" id="2_nbsx1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ehluv"]
 size = Vector2(54, 54)
@@ -13,10 +13,15 @@ size = Vector2(51, 50)
 [node name="Boss" type="CharacterBody2D" unique_id=1274796762 groups=["enemies"]]
 motion_mode = 1
 script = ExtResource("1_a60ye")
+knockbackResistance = 1.0
+wanderSpeed = 50.0
+burstCount = 4
+burstDelay = 0.25
 health = 12
-bulletScene = ExtResource("2_lnbgr")
+bulletScene = ExtResource("2_nbsx1")
 moveSpeed = 100.0
-knockbackStrength = 220.0
+chargeSpeed = 300.0
+knockbackStrength = 300.0
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=367308213]
 

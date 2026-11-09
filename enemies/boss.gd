@@ -28,10 +28,7 @@ var shotsLeft = 0
 var shotTimer = 0.0
 
 func _ready():
-	super._ready()
-
-	print(chargeWindup, " ", chargeMaxTime, " ", chargeRecover, " ", wanderDuration, " ", stunDuration)
-
+	super._ready()		
 	changeState(BossStates.WANDER)
 
 func _process(_delta):
@@ -75,7 +72,7 @@ func _physics_process(delta):
 		BossStates.WANDER:
 			bossWanderTimer -= delta
 
-			if bossWanderTimer <= 0.0 or is_on_wall():
+			if bossWanderTimer <= 0.0 or touchedWall():
 				bossMoveDir = Vector2.from_angle(randf() * TAU)
 				
 				bossWanderTimer = 0.6
@@ -92,7 +89,7 @@ func _physics_process(delta):
 
 			desired = chargeDir * chargeSpeed
 
-			if chargeElapsed > 0.1 and is_on_wall():
+			if chargeElapsed > 0.1 and touchedWall():
 				changeState(BossStates.STUNNED)
 			elif bossTimer <= 0.0:
 				changeState(BossStates.RECOVER)
@@ -122,3 +119,13 @@ func _physics_process(delta):
 	
 	if not harmless:
 		checkContactDamage(delta)
+		invincible = true
+	else:
+		invincible = false
+
+func touchedWall() -> bool:
+	for i in get_slide_collision_count():
+		var collider = get_slide_collision(i).get_collider()
+		if not (collider is CharacterBody2D):
+			return true
+	return false

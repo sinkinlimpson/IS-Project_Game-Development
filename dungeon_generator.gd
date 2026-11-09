@@ -62,7 +62,7 @@ func loadRooms(path: String):
 	var files = DirAccess.get_files_at(path)
 
 	for fileName in files:
-		if fileName.ends_with(".tscn") and fileName != "room_start.tscn":
+		if fileName.ends_with(".tscn") and fileName != "room_start.tscn" and fileName != "room_1.tscn":
 			var scenePath = path.path_join(fileName)
 			var scene = load(scenePath)
 			if scene is PackedScene:
