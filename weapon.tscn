@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bum5l82p8f5b5"]
+
+[ext_resource type="Script" uid="uid://dklpj31jw6oj3" path="res://weapon.gd" id="1_o2wld"]
+[ext_resource type="Texture2D" uid="uid://waom7qpd25nh" path="res://weapon.png" id="1_swcir"]
+
+[node name="Weapon" type="Node2D" unique_id=1801577537]
+script = ExtResource("1_o2wld")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=976238213]
+texture_filter = 1
+position = Vector2(1, 0)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_swcir")
+offset = Vector2(28.5, -14)
+
+[node name="Muzzle" type="Marker2D" parent="." unique_id=2140097981]
+position = Vector2(16, -6)

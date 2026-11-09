@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://xco4f5d02pk4"]
+
+[ext_resource type="PackedScene" uid="uid://bqfyg1p2ji13i" path="res://enemy_bullet.tscn" id="1_ybu4u"]
+[ext_resource type="Texture2D" uid="uid://cr85e76ss6n62" path="res://fireguy.png" id="2_rcspk"]
+
+[node name="Enemy Bullet" unique_id=311907793 instance=ExtResource("1_ybu4u")]
+damage = 2
+
+[node name="Sprite2D" parent="." index="0" unique_id=1210922042]
+modulate = Color(1, 1, 1, 1)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_rcspk")

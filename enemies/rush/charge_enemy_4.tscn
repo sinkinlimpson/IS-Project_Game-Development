@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://d2bbx1ae3aok5"]
+
+[ext_resource type="PackedScene" uid="uid://dnw4sxb7n4nq5" path="res://melee_enemy.tscn" id="1_0noan"]
+[ext_resource type="Texture2D" uid="uid://cgr4dfttfr0kn" path="res://buffskel.png" id="2_0noan"]
+
+[node name="Enemy" unique_id=1274796762 instance=ExtResource("1_0noan")]
+behavior = 2
+fourDirection = true
+moveSpeed = 65.0
+detectionRange = 1000.0
+chargeWindup = 0.8
+chargeMaxTime = 1.5
+chargeRecover = 1.8
+chargeSpeed = 240.0
+
+[node name="CollisionShape2D" parent="Hitbox" parent_id_path=PackedInt32Array(367308213) index="0" unique_id=316099013]
+position = Vector2(-1, 0)
+scale = Vector2(1.2800002, 0.9200003)
+
+[node name="Sprite2D" parent="." index="1" unique_id=1121289006]
+self_modulate = Color(1, 1, 1, 1)
+texture = ExtResource("2_0noan")
+
+[node name="CollisionShape2D" parent="." index="2" unique_id=1126840137]
+position = Vector2(-1, 0)
+scale = Vector2(1.4800007, 0.8800003)
