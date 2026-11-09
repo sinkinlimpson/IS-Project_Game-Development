@@ -720,6 +720,7 @@ _data = {
 size = Vector2(9, 7)
 
 [node name="Player" type="CharacterBody2D" unique_id=1478800990 groups=["player"]]
+motion_mode = 1
 script = ExtResource("1_onrkg")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=473912999]

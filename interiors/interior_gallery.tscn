@@ -1,0 +1,20 @@
+[gd_scene format=4 uid="uid://d30lm27fxbl43"]
+
+[ext_resource type="TileSet" uid="uid://b7x23mj4xaec3" path="res://dungeon.tres" id="1_qu4b6"]
+[ext_resource type="PackedScene" uid="uid://cc7e7ydetwqlo" path="res://enemy_spawner.tscn" id="2_3j3m6"]
+[ext_resource type="PackedScene" uid="uid://i41t1boqce81" path="res://enemies/patrol/enemy_patrol_shoot.tscn" id="3_0n41a"]
+
+[node name="interior_gallery" type="Node2D" unique_id=1531970920]
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="." unique_id=2117975812 groups=["wall"]]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAD8////AAACAAoAAAD8/wAAAAACAAsAAAD8/wEAAAACAAwAAAD9////AAADAAoAAAD9/wAAAAADAAsAAAD9/wEAAAADAAwAAAD+////AAAEAAoAAAD+/wAAAAAEAAsAAAD+/wEAAAAEAAwAAAACAP//AAACAAoAAAACAAAAAAACAAsAAAACAAEAAAACAAwAAAADAP//AAADAAoAAAADAAAAAAADAAsAAAADAAEAAAADAAwAAAAEAP//AAAEAAoAAAAEAAAAAAAEAAsAAAAEAAEAAAAEAAwAAAA=")
+tile_set = ExtResource("1_qu4b6")
+
+[node name="EnemySpawner" parent="." unique_id=1531457240 instance=ExtResource("2_3j3m6")]
+position = Vector2(56, -32)
+enemy = ExtResource("3_0n41a")
+
+[node name="EnemySpawner2" parent="." unique_id=139946887 instance=ExtResource("2_3j3m6")]
+position = Vector2(-40, 48)
+enemy = ExtResource("3_0n41a")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlfvt1vga1djs"
-path="res://.godot/imported/guy.png-64a8d6e0294e356486ef1e77ad36474d.ctex"
+uid="uid://ter23tiq670n"
+path="res://.godot/imported/octorok.png-424bc08108076317cf3390c37b56e3d9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://guy.png"
-dest_files=["res://.godot/imported/guy.png-64a8d6e0294e356486ef1e77ad36474d.ctex"]
+source_file="res://octorok.png"
+dest_files=["res://.godot/imported/octorok.png-424bc08108076317cf3390c37b56e3d9.ctex"]
 
 [params]
 

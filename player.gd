@@ -8,12 +8,27 @@ const FRICTION = 900.0
 
 enum States {IDLE, WALKING, ATTACKING, ROLLING, DEAD}
 
+const FACING = {
+	"up" = Vector2.UP,
+	"down" = Vector2.DOWN,
+	"left" = Vector2.LEFT,
+	"right" = Vector2.RIGHT
+}
+
+const LUNGE_DISTANCE = 15.0
+const LUNGE_TIME = 0.18
+const LUNGE_PEAK_SPEED = 2.0 * LUNGE_DISTANCE / LUNGE_TIME
+
+var attackTime = 0.0
+
 var state: States = States.IDLE
 var lookDirection = "down"
-var invincible = true
+var invincible = false
 
 func _ready():
 	$AnimationPlayer.animation_finished.connect(_on_animation_finished)
+
+	$Hitbox/CollisionShape2D.disabled = true
 
 func _physics_process(delta):
 	# get input
@@ -40,7 +55,9 @@ func _physics_process(delta):
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * 0.5 * delta)
 
 		States.ATTACKING:
-			velocity = Vector2.ZERO
+			attackTime += delta
+			var t = clampf(attackTime / LUNGE_TIME, 0.0, 1.0)
+			velocity = FACING[lookDirection] * LUNGE_PEAK_SPEED * (1.0 - t)
 
 	move_and_slide()
 	handleAnim()
@@ -73,6 +90,7 @@ func handleAnim():
 
 func attack():
 	state = States.ATTACKING
+	attackTime = 0.0
 
 func dodgeRoll(direction, lookDirection):
 	state = States.ROLLING
@@ -91,10 +109,18 @@ func dodgeRoll(direction, lookDirection):
 		velocity = direction.normalized() * MAX_SPEED * 2.7
 	flicker(4)
 
-func takeDamage(amount):
+func takeDamage(amount, fromDirection: Vector2):
+	if invincible:
+		return
+
 	health -= amount
 	print("damage taken")
 	flicker(10)
+
+	if fromDirection != Vector2.ZERO:
+			var knockbackDirection = (global_position - fromDirection).normalized()
+			velocity = knockbackDirection * 200
+
 	if health <= 0:
 		die() 
 
@@ -117,7 +143,7 @@ func _on_animation_finished(anim_name: String):
 func die():
 	queue_free()
 
-
+# sword dealing damage to enemy
 func _on_hitbox_body_entered(body: Node2D):
 	if body.is_in_group("enemies"):
 		body.takeDamage(1, global_position)

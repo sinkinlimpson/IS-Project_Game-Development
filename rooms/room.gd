@@ -30,6 +30,10 @@ func _ready():
 		if child.scene_file_path == "res://enemy_spawner.tscn":
 			hasEnemies = true
 			enemyCount += 1
+		for c in child.get_children():
+			if c.scene_file_path == "res://enemy_spawner.tscn":
+				hasEnemies = true
+				enemyCount += 1
 
 	if not door:
 		push_error("[Room Debug] ERROR: door.tscn scene is NULL or failed to load!")
@@ -49,6 +53,9 @@ func spawnEnemies():
 		for child in get_children():
 			if child.scene_file_path == "res://enemy_spawner.tscn":
 				child.spawnEnemies()
+			for c in child.get_children():
+				if c.scene_file_path == "res://enemy_spawner.tscn":
+					c.spawnEnemies()
 	else:
 		print("[Room Debug] No enemies to spawn in this room.")
 

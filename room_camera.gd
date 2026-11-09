@@ -4,6 +4,8 @@ extends Camera2D
 @export var roomPixelSize: int = 272
 @export var transitionDuration: float = 0.25
 
+@export var playerHealth: RichTextLabel
+
 var currentRoom: Vector2i
 var activeTween: Tween
 
@@ -22,6 +24,8 @@ func getRoomCenter(room: Vector2i):
 	return Vector2(room.x * roomPixelSize, room.y * roomPixelSize)
 
 func _process(_delta):
+	playerHealth.text = "Health: " + str(player.health)
+
 	if not is_instance_valid(player):
 		return
 

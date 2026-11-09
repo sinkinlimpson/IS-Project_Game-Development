@@ -2,5 +2,22 @@
 
 [ext_resource type="Script" uid="uid://ctrlrco6ovg4w" path="res://room_camera.gd" id="1_mjjp5"]
 
-[node name="Room Camera" type="Camera2D" unique_id=2095972043]
+[node name="Room Camera" type="Camera2D" unique_id=2095972043 node_paths=PackedStringArray("playerHealth")]
 script = ExtResource("1_mjjp5")
+playerHealth = NodePath("CanvasLayer/RichTextLabel")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1915934626]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=814588576]
+anchors_preset = -1
+anchor_left = 0.009000001
+anchor_top = 0.027
+anchor_right = 0.009000001
+anchor_bottom = 0.027
+offset_left = 7.8999996
+offset_top = -8.300001
+offset_right = 119.9
+offset_bottom = 31.699999
+scale = Vector2(1.4399998, 1.4800005)
+text = "Hello world"
+metadata/_edit_use_anchors_ = true
