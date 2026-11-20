@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cc7e7ydetwqlo" path="res://enemy_spawner.tscn" id="2_3j3m6"]
 [ext_resource type="PackedScene" uid="uid://i41t1boqce81" path="res://enemies/patrol/enemy_patrol_shoot.tscn" id="3_0n41a"]
 
+
 [node name="interior_gallery" type="Node2D" unique_id=1531970920]
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="." unique_id=2117975812 groups=["wall"]]

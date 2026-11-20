@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bit71yc4ek4jr" path="res://max.JPG" id="2_n18d2"]
 [ext_resource type="PackedScene" uid="uid://xco4f5d02pk4" path="res://boss_bullet.tscn" id="2_nbsx1"]
 
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ehluv"]
 size = Vector2(54, 54)
 

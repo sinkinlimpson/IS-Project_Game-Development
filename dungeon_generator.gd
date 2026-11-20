@@ -43,8 +43,6 @@ func generate():
 func _ready():
 	startRoom = load("res://rooms/room_start.tscn")
 
-	loadRooms("res://rooms/")
-
 	generate()
 
 func loadRooms(path: String):

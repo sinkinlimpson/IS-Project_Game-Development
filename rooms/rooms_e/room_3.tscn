@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cc7e7ydetwqlo" path="res://enemy_spawner.tscn" id="3_4cdot"]
 [ext_resource type="PackedScene" uid="uid://qkqfmtrv7n6n" path="res://enemies/patrol/enemy_patrol_fly.tscn" id="4_yt0g1"]
 
+
 [node name="room_1" type="Node2D" unique_id=686691244]
 script = ExtResource("1_6cba5")
 hasEast = true

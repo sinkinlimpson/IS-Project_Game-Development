@@ -222,6 +222,8 @@ func _on_flicker_finished():
 func die():
 	if get_parent() is Room:
 		get_parent().enemyCount -= 1
+	if get_parent().get_parent() is Room:
+		get_parent().get_parent().enemyCount -= 1
 
 	queue_free()
 

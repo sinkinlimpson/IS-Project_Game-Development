@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cc7e7ydetwqlo" path="res://enemy_spawner.tscn" id="2_73bme"]
 [ext_resource type="PackedScene" uid="uid://qkqfmtrv7n6n" path="res://enemies/patrol/enemy_patrol_fly.tscn" id="3_nljfo"]
 
+
 [node name="interior_flutter" type="Node2D" unique_id=67819764]
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="." unique_id=1138849554 groups=["wall"]]
