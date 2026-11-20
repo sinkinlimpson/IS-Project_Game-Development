@@ -1,6 +1,6 @@
 # Working Title
 
-An arade-style roguelite twin-stick shooter developed as part of my Software Engineering Through Game Development independent study.
+An arcade-style roguelite inspired by The Legend of Zelda created as part of my Software Engineering Through Game Development independent study.
 
 ## About
 
