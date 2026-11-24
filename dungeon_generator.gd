@@ -5,10 +5,11 @@ extends Node2D
 @export var camera: Camera2D
 @export var player: Node2D
 
-@export var gridWidth: int = 17
-@export var gridHeight: int = 17
+@export var gridWidth: int = 16
+@export var gridHeight: int = 12
 @export var maxRooms: int = 12
-@export var roomPixelSize: int = 272
+@export var roomWidth = 256
+@export var roomHeight = 192
 
 var dungeonGrid = {}
 var roomInstances = {}
@@ -160,7 +161,7 @@ func spawnDungeonRooms():
 		
 		if validRoomScene:
 			var roomInstance = validRoomScene.instantiate()
-			roomInstance.position = Vector2(pos.x * roomPixelSize, pos.y * roomPixelSize)
+			roomInstance.position = Vector2(pos.x * roomWidth, pos.y * roomHeight)
 			add_child(roomInstance)
 			roomInstances[pos] = roomInstance
 

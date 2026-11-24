@@ -10,7 +10,7 @@ script = ExtResource("1_64df0")
 
 [node name="Player" parent="." unique_id=1478800990 instance=ExtResource("1_koh7o")]
 z_index = 1
-position = Vector2(2176, 2176)
+position = Vector2(2176, 1248)
 
 [node name="Dungeon Generator" parent="." unique_id=366812947 node_paths=PackedStringArray("camera", "player") instance=ExtResource("2_nd2q6")]
 camera = NodePath("../RoomCamera")
@@ -18,7 +18,7 @@ player = NodePath("../Player")
 
 [node name="RoomCamera" parent="." unique_id=2095972043 node_paths=PackedStringArray("player") instance=ExtResource("3_koh7o")]
 position = Vector2(2176, 2176)
-zoom = Vector2(3, 3)
+zoom = Vector2(6.2, 6.2)
 player = NodePath("../Player")
 transitionDuration = 0.35
 
