@@ -10,7 +10,7 @@ script = ExtResource("1_64df0")
 
 [node name="Player" parent="." unique_id=1478800990 instance=ExtResource("1_koh7o")]
 z_index = 1
-position = Vector2(2176, 1248)
+position = Vector2(2048, 1152)
 
 [node name="Dungeon Generator" parent="." unique_id=366812947 node_paths=PackedStringArray("camera", "player") instance=ExtResource("2_nd2q6")]
 camera = NodePath("../RoomCamera")

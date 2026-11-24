@@ -4,7 +4,6 @@
 
 [node name="Room Camera" type="Camera2D" unique_id=2095972043 node_paths=PackedStringArray("playerHealth")]
 script = ExtResource("1_mjjp5")
-roomPixelSize = 256
 playerHealth = NodePath("CanvasLayer/RichTextLabel")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1915934626]

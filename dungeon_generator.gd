@@ -36,8 +36,6 @@ func generate():
 	selectBossRoom()
 	spawnDungeonRooms()
 
-	printDungeonLayout()
-
 	if is_instance_valid(camera) and camera.has_method("snapToPlayer"):
 		camera.snapToPlayer()
 
@@ -162,6 +160,10 @@ func spawnDungeonRooms():
 		if validRoomScene:
 			var roomInstance = validRoomScene.instantiate()
 			roomInstance.position = Vector2(pos.x * roomWidth, pos.y * roomHeight)
+
+			if validRoomScene.resource_path.contains("start"):
+				print(roomInstance.position)
+
 			add_child(roomInstance)
 			roomInstances[pos] = roomInstance
 
